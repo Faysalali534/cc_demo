@@ -5,7 +5,6 @@ from django.db import models
 
 from main.api import get_client
 
-
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -21,14 +20,11 @@ class Account(models.Model):
     API credentials of user's account
     """
 
-    exchange = models.CharField(max_length=250, choices=Exchanges.choices)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    api_key = models.CharField(max_length=250)
-    secret = models.CharField(max_length=250)
-    password = models.CharField(max_length=250, blank=True, null=True)
-    default_fee_rate = models.DecimalField(
-        max_digits=30, decimal_places=4, default=Decimal(0.1)
-    )
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='user_name')
+    api_keys = models.CharField(max_length=250)
+    secret_key = models.CharField(max_length=250)
+
 
     def get_account_client(self):
         return get_client(
@@ -37,9 +33,17 @@ class Account(models.Model):
 
 
 class Currency(models.Model):
-
     name = models.CharField(max_length=50, blank=True, null=True)
     short_code = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return f"{self.pk}: {self.short_code}"
+
+
+class Input(models.Model):
+    api_key = models.CharField(max_length=250)
+    secret = models.CharField(max_length=250)
+    api_key = models.ForeignKey(Account, on_delete=models.CASCADE, related_name='api_key')
+    secret = models.ForeignKey(Account, on_delete= models.CASCADE,related_name='secret')
+
+

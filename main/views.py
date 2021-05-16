@@ -1,4 +1,4 @@
-from main.serializers import SignUpSerializer
+from main.serializers import AccountSerializer
 
 from rest_framework.views import APIView
 
@@ -7,10 +7,10 @@ from rest_framework.response import Response
 from rest_framework import status
 
 
-class SignUp(APIView):
+class Register(APIView):
 
     def post(self, request):
-        serializer = SignUpSerializer(data=request.data)
+        serializer = AccountSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

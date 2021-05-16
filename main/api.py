@@ -1,3 +1,4 @@
+import time
 from datetime import datetime
 
 import ccxt
@@ -42,26 +43,31 @@ class ExchangeManipulation:
         client.set_sandbox_mode(True)
         balance = client.fetch_balance({'coin': self.currency})
         # ledger = client.fetch_ledger(params={"wallet_fund_type": "RealisedPNL"})
+        acscassd=datetime.strptime('2021-05-13 00:09:10', '%Y-%m-%d %H:%M:%S')
+        unixtime = time.mktime(acscassd.timetuple())
         ledger = client.fetch_ledger(params={"currency": self.currency})
-        self._get_realised_pnl(balance=balance, ledger=ledger)
+        self._place_queue_data(balance=balance, ledger=ledger)
         print()
 
-    def _get_realised_pnl(self, balance, ledger):
+    def _place_queue_data(self, balance, ledger):
         realised_pnl = balance["info"]["result"][self.currency].get("realised_pnl")
         for data in ledger:
             ledger_id = data.get("id")
-            amount = data.get("amount")
-            before = data.get("before")
-            after = data.get("after")
-            transaction_time = data.get("datetime")
-            captured_date = datetime.strptime(transaction_time[:-1], '%Y-%m-%dT%H:%M:%S.%f')
-            type = data.get("info")["type"]
-            RecordedData.objects.create(
-                type=type,
-                after=after,
-                captured_date=captured_date,
-                ledger_id=ledger_id,
-                Input=self.input_instance,
-                before=before,
-                amount=amount,
-            )
+            leger_id_present = RecordedData.objects.filter(ledger_id__exact=ledger_id)
+            if not leger_id_present:
+                amount = data.get("amount")
+                before = data.get("before")
+                after = data.get("after")
+                transaction_time = data.get("datetime")
+                captured_date = datetime.strptime(transaction_time[:-1], '%Y-%m-%dT%H:%M:%S.%f')
+                type = data.get("info")["type"]
+                RecordedData.objects.create(
+                    type=type,
+                    after=after,
+                    captured_date=captured_date,
+                    ledger_id=ledger_id,
+                    Input=self.input_instance,
+                    before=before,
+                    realised_pnl=realised_pnl,
+                    amount=amount,
+                )

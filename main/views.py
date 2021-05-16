@@ -69,5 +69,6 @@ def handle_queue_data(request):
                 input_instance=input_instance
             )
             exchange_manipulation.generate_balance_and_leger()
+            return Response(dict(message="successfully queued"), status=status.HTTP_200_OK)
         except Exception as error:
             return Response(dict(message=str(error)), status=400)

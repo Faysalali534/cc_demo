@@ -42,12 +42,10 @@ class ExchangeManipulation:
         client = self._get_client()
         client.set_sandbox_mode(True)
         balance = client.fetch_balance({'coin': self.currency})
-        # ledger = client.fetch_ledger(params={"wallet_fund_type": "RealisedPNL"})
-        acscassd=datetime.strptime('2021-05-13 00:09:10', '%Y-%m-%d %H:%M:%S')
-        unixtime = time.mktime(acscassd.timetuple())
-        ledger = client.fetch_ledger(params={"currency": self.currency})
+        start_unix_date = time.mktime(self.start_date.timetuple())
+        end_unix_date = time.mktime(self.end_date.timetuple())
+        ledger = client.fetch_ledger(params={"currency": self.currency, "till": end_unix_date}, since=start_unix_date)
         self._place_queue_data(balance=balance, ledger=ledger)
-        print()
 
     def _place_queue_data(self, balance, ledger):
         realised_pnl = balance["info"]["result"][self.currency].get("realised_pnl")
@@ -61,13 +59,24 @@ class ExchangeManipulation:
                 transaction_time = data.get("datetime")
                 captured_date = datetime.strptime(transaction_time[:-1], '%Y-%m-%dT%H:%M:%S.%f')
                 type = data.get("info")["type"]
-                RecordedData.objects.create(
-                    type=type,
-                    after=after,
-                    captured_date=captured_date,
-                    ledger_id=ledger_id,
-                    Input=self.input_instance,
-                    before=before,
-                    realised_pnl=realised_pnl,
-                    amount=amount,
-                )
+                if type.lower() == 'realisedpnl':
+                    RecordedData.objects.create(
+                        type=type,
+                        after=after,
+                        captured_date=captured_date,
+                        ledger_id=ledger_id,
+                        Input=self.input_instance,
+                        before=before,
+                        realised_pnl=realised_pnl,
+                        amount=amount,
+                    )
+                else:
+                    RecordedData.objects.create(
+                        type=type,
+                        after=after,
+                        captured_date=captured_date,
+                        ledger_id=ledger_id,
+                        Input=self.input_instance,
+                        before=before,
+                        amount=amount,
+                    )

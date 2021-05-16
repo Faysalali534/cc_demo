@@ -1,4 +1,11 @@
+from django.contrib.auth import logout
+from django.http import JsonResponse
+from django.views.decorators.csrf import ensure_csrf_cookie
+
+from rest_framework.authentication import TokenAuthentication
+
 from rest_framework.decorators import api_view
+from rest_framework.permissions import IsAuthenticated
 
 from main.api import ExchangeManipulation
 
@@ -81,3 +88,19 @@ def handle_queue_data(request):
 class Currency(generics.ListAPIView):
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer
+
+
+class CheckAuth(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = (IsAuthenticated,)
+
+    def get(self, request):
+        return Response({'detail': 'You\'re Authenticated'})
+
+
+class Logout(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        request.user.auth_token.delete()
+        return Response({'detail': 'You\'re logout'})

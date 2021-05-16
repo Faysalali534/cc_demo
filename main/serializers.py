@@ -2,6 +2,7 @@ from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from main.models import Account
+from main.models import Input
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -26,3 +27,8 @@ class AccountSerializer(serializers.ModelSerializer):
         )
         return account
 
+
+class InputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Input
+        fields = '__all__'

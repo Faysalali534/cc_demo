@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
+from main.models import Currency
 from main.models import Account
 from main.models import Input
 
@@ -31,4 +32,10 @@ class AccountSerializer(serializers.ModelSerializer):
 class InputSerializer(serializers.ModelSerializer):
     class Meta:
         model = Input
+        fields = '__all__'
+
+
+class CurrencySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Currency
         fields = '__all__'

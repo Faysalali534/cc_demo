@@ -1,8 +1,12 @@
 from rest_framework.decorators import api_view
 
 from main.api import ExchangeManipulation
+
 from main.models import Input
+from main.models import Currency
+
 from main.serializers import AccountSerializer
+from main.serializers import CurrencySerializer
 from main.serializers import InputSerializer
 
 from rest_framework.views import APIView
@@ -10,6 +14,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from rest_framework import status
+from rest_framework import generics
 
 
 class Register(APIView):
@@ -57,7 +62,6 @@ def handle_queue_data(request):
             if not id:
                 raise ValueError(f"provide 'input_data_id' to proceed")
             input_instance = Input.objects.get(pk=id)
-            print()
             exchange_manipulation = ExchangeManipulation(
                 start_date=input_instance.start_date,
                 end_date=input_instance.end_date,
@@ -72,3 +76,8 @@ def handle_queue_data(request):
             return Response(dict(message="successfully queued"), status=status.HTTP_200_OK)
         except Exception as error:
             return Response(dict(message=str(error)), status=400)
+
+
+class Currency(generics.ListAPIView):
+    queryset = Currency.objects.all()
+    serializer_class = CurrencySerializer

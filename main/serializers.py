@@ -17,7 +17,7 @@ class AccountSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Account
-        fields = ['api_key', 'secret_key', 'user']
+        fields = ['id', 'api_key', 'secret_key', 'user']
 
     def create(self, validated_data):
         account_info = validated_data.pop("user")
@@ -25,3 +25,4 @@ class AccountSerializer(serializers.ModelSerializer):
             user_data=account_info, api_key=validated_data.get("api_key"), secret_key=validated_data.get("secret_key")
         )
         return account
+

@@ -65,8 +65,8 @@ class Account(models.Model):
     """
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    api_key = models.TextField()
-    secret_key = models.TextField()
+    api_key = models.TextField(unique=True)
+    secret_key = models.TextField(unique=True)
     objects = AccountManager()
 
     def get_account_client(self):

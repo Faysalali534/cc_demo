@@ -12,7 +12,7 @@ class Register(APIView):
     def post(self, request):
         try:
             serializer = AccountSerializer(data=request.data)
-            if serializer.is_valid():
+            if serializer.is_valid(raise_exception=True):
                 serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except Exception as error:

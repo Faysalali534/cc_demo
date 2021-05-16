@@ -68,6 +68,9 @@ class Account(models.Model):
     secret_key = models.TextField(unique=True)
     objects = AccountManager()
 
+    def __str__(self):
+        return f"<id:{self.pk}> - <user:{self.user.username}>"
+
 
 class Currency(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
@@ -84,6 +87,9 @@ class Input(models.Model):
     end_date = models.DateTimeField(default=django.utils.timezone.now)
     category = models.CharField(max_length=30, default='inverse')
 
+    def __str__(self):
+        return f"<id:{self.pk}> - <currency:{self.currency.short_code}> - <user:{self.account.user.username}>"
+
 
 class RecordedData(models.Model):
     Input = models.ForeignKey(Input, on_delete=models.CASCADE)
@@ -95,6 +101,5 @@ class RecordedData(models.Model):
     captured_date = models.DateTimeField()
     type = models.CharField(max_length=30, default='')
 
-
     def __str__(self):
-        return f"{self.ledger_id}: {self.realised_pnl} : {self.type}"
+        return f"<ledger_id:{self.ledger_id}> - <realised_pnl:{self.realised_pnl}> - <type:{self.type}>"

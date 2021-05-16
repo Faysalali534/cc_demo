@@ -4,8 +4,6 @@ import django
 from django.contrib.auth.models import User
 from django.db import models
 
-from main.api import get_client
-
 # Get an instance of a logger
 logger = logging.getLogger(__name__)
 
@@ -86,7 +84,18 @@ class Currency(models.Model):
 
 class Input(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
-    Currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
+    currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(default=django.utils.timezone.now)
     category = models.CharField(max_length=30, default='inverse')
+
+
+class RecordedData(models.Model):
+    Input = models.ForeignKey(Input, on_delete=models.CASCADE)
+    before = models.CharField(max_length=60)
+    amount = models.CharField(max_length=60)
+    after = models.CharField(max_length=60)
+    ledger_id = models.CharField(max_length=60)
+    realised_pnl = models.CharField(max_length=60)
+    captured_date = models.DateTimeField()
+    type = models.CharField(max_length=30, default='')

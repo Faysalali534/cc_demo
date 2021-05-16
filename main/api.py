@@ -1,4 +1,8 @@
+from datetime import datetime
+
 import ccxt
+
+from main.models import RecordedData
 
 
 class ExchangeManipulation:
@@ -11,7 +15,6 @@ class ExchangeManipulation:
         self.secret_key = kwargs.get('secret_key')
         self.exchange_id = kwargs.get('exchange_id')
         self.input_instance = kwargs.get('input_instance')
-
 
     def _get_client(self):
         """
@@ -44,12 +47,21 @@ class ExchangeManipulation:
         print()
 
     def _get_realised_pnl(self, balance, ledger):
-        realised_pnl = balance['info']['result'][self.currency].get('realised_pnl')
+        realised_pnl = balance["info"]["result"][self.currency].get("realised_pnl")
         for data in ledger:
-            ledger_id = data.get('id')
-            amount = data.get('amount')
-            before = data.get('before')
-            after = data.get('after')
-            transaction_time = data.get('datetime')
-            type = data.get('info')['type']
-            
+            ledger_id = data.get("id")
+            amount = data.get("amount")
+            before = data.get("before")
+            after = data.get("after")
+            transaction_time = data.get("datetime")
+            captured_date = datetime.strptime(transaction_time[:-1], '%Y-%m-%dT%H:%M:%S.%f')
+            type = data.get("info")["type"]
+            RecordedData.objects.create(
+                type=type,
+                after=after,
+                captured_date=captured_date,
+                ledger_id=ledger_id,
+                Input=self.input_instance,
+                before=before,
+                amount=amount,
+            )

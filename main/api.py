@@ -2,6 +2,9 @@ import time
 from datetime import datetime
 
 import ccxt
+from rest_framework import status
+from rest_framework.exceptions import AuthenticationFailed
+from ccxt.base.errors import AuthenticationError
 
 from main.models import RecordedData
 
@@ -41,10 +44,13 @@ class ExchangeManipulation:
     def generate_balance_and_leger(self):
         client = self._get_client()
         client.set_sandbox_mode(True)
-        balance = client.fetch_balance({'coin': self.currency})
+        balance = client.fetch_balance({"coin": self.currency})
         start_unix_date = time.mktime(self.start_date.timetuple())
         end_unix_date = time.mktime(self.end_date.timetuple())
-        ledger = client.fetch_ledger(params={"currency": self.currency, "till": end_unix_date}, since=start_unix_date)
+        ledger = client.fetch_ledger(
+            params={"currency": self.currency, "till": end_unix_date},
+            since=start_unix_date,
+        )
         self._place_queue_data(balance=balance, ledger=ledger)
 
     def _place_queue_data(self, balance, ledger):

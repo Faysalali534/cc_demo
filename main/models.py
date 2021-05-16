@@ -68,11 +68,6 @@ class Account(models.Model):
     secret_key = models.TextField(unique=True)
     objects = AccountManager()
 
-    def get_account_client(self):
-        return get_client(
-            api_key=self.api_key, secret=self.secret
-        )
-
 
 class Currency(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
@@ -99,3 +94,7 @@ class RecordedData(models.Model):
     realised_pnl = models.CharField(max_length=60)
     captured_date = models.DateTimeField()
     type = models.CharField(max_length=30, default='')
+
+
+    def __str__(self):
+        return f"{self.ledger_id}: {self.realised_pnl} : {self.type}"

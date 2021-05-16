@@ -4,6 +4,7 @@ from main import views
 
 urlpatterns = [
     path('register/', views.Register.as_view(), name='register'),
-    path('input/', views.Input.as_view(), name='input')
+    path('input/', views.InputData.as_view(), name='input'),
+    path('input/update/<int:id>', views.handle_input_update, name='input_update')
 
 ]

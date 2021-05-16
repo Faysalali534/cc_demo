@@ -1,5 +1,6 @@
 import logging
-from decimal import Decimal
+
+import django
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -84,7 +85,7 @@ class Currency(models.Model):
 
 
 class Input(models.Model):
-    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+    account = models.OneToOneField(Account, on_delete=models.CASCADE)
     start_date = models.DateTimeField()
-    end_date = models.DateTimeField(auto_now_add=True)
+    end_date = models.DateTimeField(default=django.utils.timezone.now)
     category = models.CharField(max_length=30, default='inverse')

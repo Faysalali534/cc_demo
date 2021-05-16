@@ -1,3 +1,4 @@
+from ccxt import AuthenticationError
 from rest_framework.authentication import TokenAuthentication
 
 from rest_framework.decorators import api_view
@@ -77,6 +78,9 @@ def handle_queue_data(request):
             )
             exchange_manipulation.generate_balance_and_leger()
             return Response(dict(message="successfully queued"), status=status.HTTP_200_OK)
+        except AuthenticationError:
+            return Response(dict(message="provide correct 'api key' and 'secret key'"),
+                            status=status.HTTP_401_UNAUTHORIZED)
         except Exception as error:
             return Response(dict(message=str(error)), status=400)
 

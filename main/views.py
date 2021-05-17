@@ -1,10 +1,8 @@
 from ccxt import AuthenticationError
 from rest_framework.authentication import TokenAuthentication
 
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
-
-from main.api import ExchangeManipulation
 
 from main.models import Input
 from main.models import Currency
@@ -20,7 +18,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 
-from main.tasks import go_to_sleep
+from main.tasks import generate_balance_and_leger
 
 
 class Register(APIView):
@@ -61,28 +59,22 @@ def handle_input_update(request, id):
 
 
 @api_view(["POST"])
+@permission_classes([IsAuthenticated])
 def handle_queue_data(request):
     if request.method == "POST":
         try:
             id = request.data.get("input_data_id")
             if not id:
                 raise ValueError(f"provide 'input_data_id' to proceed")
-            input_instance = Input.objects.get(pk=id)
-            exchange_manipulation = ExchangeManipulation(
-                start_date=input_instance.start_date,
-                end_date=input_instance.end_date,
-                currency=input_instance.currency.short_code,
-                category=input_instance.category,
-                exchange_id="bybit",
-                api_key=input_instance.account.api_key,
-                secret_key=input_instance.account.secret_key,
-                input_instance=input_instance
+            generate_balance_and_leger.delay(id)
+            return Response(
+                dict(message="successfully queued"), status=status.HTTP_200_OK
             )
-            exchange_manipulation.generate_balance_and_leger()
-            return Response(dict(message="successfully queued"), status=status.HTTP_200_OK)
         except AuthenticationError:
-            return Response(dict(message="provide correct 'api key' and 'secret key'"),
-                            status=status.HTTP_401_UNAUTHORIZED)
+            return Response(
+                dict(message="provide correct 'api key' and 'secret key'"),
+                status=status.HTTP_401_UNAUTHORIZED,
+            )
         except Exception as error:
             return Response(dict(message=str(error)), status=400)
 
@@ -97,7 +89,6 @@ class CheckAuth(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
-        go_to_sleep.delay(5)
         return Response({'detail': 'You\'re Authenticated'})
 
 

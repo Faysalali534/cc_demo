@@ -2,9 +2,7 @@ import time
 from datetime import datetime
 
 import ccxt
-from rest_framework import status
-from rest_framework.exceptions import AuthenticationFailed
-from ccxt.base.errors import AuthenticationError
+
 
 from main.models import RecordedData
 

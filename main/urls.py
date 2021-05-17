@@ -13,5 +13,6 @@ urlpatterns = [
     path('login/', CustomAuthToken.as_view(), name='login'),
     path('check/', views.CheckAuth.as_view(), name='test'),
     path('logout/', views.Logout.as_view(), name='logout'),
+    path('Recorded/Data/<int:Input>', views.RecordedDataList.as_view(), name='recorded_data'),
 
 ]

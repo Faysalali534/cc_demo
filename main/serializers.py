@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from main.models import Currency
+from main.models import Currency, RecordedData
 from main.models import Account
 from main.models import Input
 
@@ -38,4 +38,10 @@ class InputSerializer(serializers.ModelSerializer):
 class CurrencySerializer(serializers.ModelSerializer):
     class Meta:
         model = Currency
+        fields = '__all__'
+
+
+class RecordedDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = RecordedData
         fields = '__all__'

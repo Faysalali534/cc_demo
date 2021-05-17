@@ -20,6 +20,8 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
 
+from main.tasks import go_to_sleep
+
 
 class Register(APIView):
 
@@ -95,6 +97,7 @@ class CheckAuth(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
+        go_to_sleep.delay(5)
         return Response({'detail': 'You\'re Authenticated'})
 
 

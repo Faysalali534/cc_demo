@@ -8,7 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from main.models import Input, Account, RecordedData
 from main.models import Currency
 
-from main.serializers import AccountSerializer
+from main.serializers import AccountSerializer, RecordedDataSerializer
 from main.serializers import CurrencySerializer
 from main.serializers import InputSerializer
 
@@ -124,7 +124,9 @@ class CustomAuthToken(ObtainAuthToken):
 
         return Response(response)
 
-# class RecordedDataList(generics.RetrieveAPIView):
-#     queryset = RecordedData.objects.all()
-#     serializer_class = UserSerializer
-#     permission_classes = [IsAdminUser]
+
+class RecordedDataList(generics.ListAPIView):
+    queryset = RecordedData.objects.all()
+    serializer_class = RecordedDataSerializer
+    permission_classes = (IsAuthenticated,)
+    lookup_field = 'Input'

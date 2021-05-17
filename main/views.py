@@ -115,7 +115,7 @@ class CustomAuthToken(ObtainAuthToken):
         account = Account.objects.filter(user_id=user.pk)[0].id
         input_account = Input.objects.filter(account_id=account)
         response = dict(
-            token=token.key, account_id=account, is_account_input_used=False
+            token=token.key, account_id=account, is_account_input_used=False, input_id=0
         )
 
         if input_account:

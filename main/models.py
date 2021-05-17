@@ -88,7 +88,7 @@ class Input(models.Model):
     category = models.CharField(max_length=30, default='inverse')
 
     def __str__(self):
-        return f"<id:{self.pk}> - <currency:{self.currency.short_code}> - <user:{self.account.user.username}>"
+        return f"<id:{self.pk}> - <currency:{self.currency.short_code}> - <user:{self.account.user.username}> - <account_id:{self.account.id}>"
 
 
 class RecordedData(models.Model):
@@ -102,4 +102,4 @@ class RecordedData(models.Model):
     type = models.CharField(max_length=30, default='')
 
     def __str__(self):
-        return f"<ledger_id:{self.ledger_id}> - <realised_pnl:{self.realised_pnl}> - <type:{self.type}>"
+        return f"<ledger_id:{self.ledger_id}> - <realised_pnl:{self.realised_pnl}> - <type:{self.type}> - <input_id:{self.Input.id}>"

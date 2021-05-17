@@ -34,6 +34,7 @@ class Register(APIView):
 
 
 class InputData(APIView):
+    permission_classes = (IsAuthenticated,)
 
     def post(self, request):
         try:
@@ -46,6 +47,7 @@ class InputData(APIView):
 
 
 @api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 def handle_input_update(request, id):
     if request.method == 'PUT':
         try:
@@ -80,6 +82,7 @@ def handle_queue_data(request):
 
 
 class Currency(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
     queryset = Currency.objects.all()
     serializer_class = CurrencySerializer
 

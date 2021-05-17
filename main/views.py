@@ -105,15 +105,21 @@ class Logout(APIView):
 
 
 class CustomAuthToken(ObtainAuthToken):
-
     def post(self, request, *args, **kwargs):
-        serializer = self.serializer_class(data=request.data,
-                                           context={'request': request})
+        serializer = self.serializer_class(
+            data=request.data, context={"request": request}
+        )
         serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
+        user = serializer.validated_data["user"]
         token, created = Token.objects.get_or_create(user=user)
-        account = Account.objects.filter(user_id=user.pk)
-        return Response({
-            'token': token.key,
-            'account_id': account[0].id,
-        })
+        account = Account.objects.filter(user_id=user.pk)[0].id
+        input_account = Input.objects.filter(account_id=account)
+        response = dict(
+            token=token.key, account_id=account, is_account_input_used=False
+        )
+
+        if input_account:
+            response["is_account_input_used"] = True
+
+        return Response(response)
+

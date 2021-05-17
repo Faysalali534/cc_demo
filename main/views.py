@@ -1,10 +1,11 @@
 from ccxt import AuthenticationError
 from rest_framework.authentication import TokenAuthentication
-
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from main.models import Input
+from main.models import Input, Account
 from main.models import Currency
 
 from main.serializers import AccountSerializer
@@ -101,3 +102,18 @@ class Logout(APIView):
     def post(self, request):
         request.user.auth_token.delete()
         return Response({'detail': 'You\'re logout'})
+
+
+class CustomAuthToken(ObtainAuthToken):
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data,
+                                           context={'request': request})
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        token, created = Token.objects.get_or_create(user=user)
+        account = Account.objects.filter(user_id=user.pk)
+        return Response({
+            'token': token.key,
+            'account_id': account[0].id,
+        })

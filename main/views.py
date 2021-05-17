@@ -5,7 +5,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from main.models import Input, Account
+from main.models import Input, Account, RecordedData
 from main.models import Currency
 
 from main.serializers import AccountSerializer
@@ -120,6 +120,11 @@ class CustomAuthToken(ObtainAuthToken):
 
         if input_account:
             response["is_account_input_used"] = True
+            response["input_id"] = input_account[0].id
 
         return Response(response)
 
+# class RecordedDataList(generics.RetrieveAPIView):
+#     queryset = RecordedData.objects.all()
+#     serializer_class = UserSerializer
+#     permission_classes = [IsAdminUser]

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import configparser
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,6 +26,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+
+def get_all_env_variables():
+    get_env_value = configparser.ConfigParser()
+    get_env_value.read_file(open(r"{file_path}configuration.cfg".format(file_path=__file__[:-19])))
+    return get_env_value
+
+
+env_variable = get_all_env_variables()
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,7 +46,8 @@ INSTALLED_APPS = [
     'main',
     'corsheaders',
     'rest_framework.authtoken',
-    'django_celery_results'
+    'django_celery_results',
+    'django_seed',
 ]
 
 MIDDLEWARE = [
@@ -78,11 +87,11 @@ WSGI_APPLICATION = 'cc_demo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd6jspd6g99nuck',
-        'USER': 'lstsmlmzudwwgz',
-        'PASSWORD': '40b2dc0d214b6161fb9ca4bf8acbcad755496b922d27aaa514a9e1096546f226',
-        'HOST': 'ec2-52-87-22-151.compute-1.amazonaws.com',
-        'PORT': '5432'
+        'NAME': env_variable.get("Postgresql-Cred", "database"),
+        'USER': env_variable.get("Postgresql-Cred", "user_name"),
+        'PASSWORD': env_variable.get("Postgresql-Cred", "password"),
+        'HOST': env_variable.get("Postgresql-Cred", "host"),
+        'PORT': 5432
     }
 }
 

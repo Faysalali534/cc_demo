@@ -8,7 +8,10 @@ from rest_framework.permissions import IsAuthenticated
 from main.models import Input, Account, RecordedData
 from main.models import Currency
 
-from main.serializers import AccountSerializer, RecordedDataSerializer
+from main.serializers import AccountSerializer
+from main.serializers import RecordedDataSerializer
+from main.serializers import ReteriveInputSerializer
+
 from main.serializers import CurrencySerializer
 from main.serializers import InputSerializer
 
@@ -130,3 +133,9 @@ class RecordedDataList(generics.ListAPIView):
     serializer_class = RecordedDataSerializer
     permission_classes = (IsAuthenticated,)
     lookup_field = 'Input'
+
+
+class InputRetrieve(generics.RetrieveAPIView):
+    queryset = Input.objects.all()
+    serializer_class = ReteriveInputSerializer
+    permission_classes = (IsAuthenticated,)

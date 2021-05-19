@@ -45,3 +45,10 @@ class RecordedDataSerializer(serializers.ModelSerializer):
     class Meta:
         model = RecordedData
         fields = '__all__'
+
+
+class ReteriveInputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Input
+        fields = '__all__'
+        depth = 1

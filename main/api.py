@@ -3,7 +3,6 @@ from datetime import datetime
 
 import ccxt
 
-
 from main.models import RecordedData
 
 
@@ -51,6 +50,13 @@ class ExchangeManipulation:
         )
         self._place_queue_data(balance=balance, ledger=ledger)
 
+    def _calculate_roi(self, after, before):
+        after_value = float(after)
+        before_value = float(before)
+
+        roi = after_value - before_value / before_value * 100
+        return roi
+
     def _place_queue_data(self, balance, ledger):
         realised_pnl = balance["info"]["result"][self.currency].get("realised_pnl")
         for data in ledger:
@@ -63,6 +69,7 @@ class ExchangeManipulation:
                 transaction_time = data.get("datetime")
                 captured_date = datetime.strptime(transaction_time[:-1], '%Y-%m-%dT%H:%M:%S.%f')
                 type = data.get("info")["type"]
+                roi = self._calculate_roi(after=after, before=before)
                 if type.lower() == 'realisedpnl':
                     RecordedData.objects.create(
                         type=type,
@@ -73,6 +80,7 @@ class ExchangeManipulation:
                         before=before,
                         realised_pnl=realised_pnl,
                         amount=amount,
+                        roi=roi
                     )
                 else:
                     RecordedData.objects.create(
@@ -83,4 +91,6 @@ class ExchangeManipulation:
                         Input=self.input_instance,
                         before=before,
                         amount=amount,
+                        roi=roi
+
                     )

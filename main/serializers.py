@@ -52,3 +52,9 @@ class ReteriveInputSerializer(serializers.ModelSerializer):
         model = Input
         fields = '__all__'
         depth = 1
+
+
+class AccountRetrieveUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ['id', 'api_key', 'secret_key']

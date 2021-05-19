@@ -53,8 +53,10 @@ class ExchangeManipulation:
     def _calculate_roi(self, after, before):
         after_value = float(after)
         before_value = float(before)
-
-        roi = after_value - before_value / before_value * 100
+        total = before_value * 100
+        if not total:
+            total = 10
+        roi = after_value - before_value / total
         return roi
 
     def _place_queue_data(self, balance, ledger):

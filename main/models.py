@@ -95,7 +95,7 @@ class Input(models.Model):
     category = models.CharField(max_length=30, default='inverse')
 
     def __str__(self):
-        return f"<id:{self.pk}> - <currency:{self.currency.short_code}> - <user:{self.account.user.username}> - <account_id:{self.account.id}>"
+        return f"<id:{self.pk}> - <currency:{self.currency.name}> - <user:{self.account.user.username}> - <account_id:{self.account.id}>"
 
 
 class RecordedData(models.Model):
@@ -106,6 +106,7 @@ class RecordedData(models.Model):
     ledger_id = models.CharField(max_length=60)
     realised_pnl = models.CharField(max_length=60)
     captured_date = models.DateTimeField()
+    roi = models.CharField(max_length=60)
     type = models.CharField(max_length=30, default='')
 
     def __str__(self):

@@ -13,7 +13,7 @@ def generate_balance_and_leger(self, pk_num):
     exchange_manipulation = ExchangeManipulation(
         start_date=input_instance.start_date,
         end_date=input_instance.end_date,
-        currency=input_instance.currency.short_code,
+        currency=input_instance.currency.name,
         category=input_instance.category,
         exchange_id=input_instance.exchange.name,
         api_key=input_instance.account.api_key,

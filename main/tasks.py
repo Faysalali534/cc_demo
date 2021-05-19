@@ -15,7 +15,7 @@ def generate_balance_and_leger(self, pk_num):
         end_date=input_instance.end_date,
         currency=input_instance.currency.short_code,
         category=input_instance.category,
-        exchange_id="bybit",
+        exchange_id=input_instance.exchange.name,
         api_key=input_instance.account.api_key,
         secret_key=input_instance.account.secret_key,
         input_instance=input_instance,

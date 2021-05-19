@@ -74,15 +74,22 @@ class Account(models.Model):
 
 class Currency(models.Model):
     name = models.CharField(max_length=50, blank=True, null=True)
-    short_code = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
-        return f"{self.pk}: {self.short_code}"
+        return f"{self.name}"
+
+
+class Exchange(models.Model):
+    name = models.CharField(max_length=60, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.name}"
 
 
 class Input(models.Model):
     account = models.OneToOneField(Account, on_delete=models.CASCADE)
     currency = models.ForeignKey(Currency, on_delete=models.CASCADE)
+    exchange = models.ForeignKey(Exchange, on_delete=models.CASCADE)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(default=django.utils.timezone.now)
     category = models.CharField(max_length=30, default='inverse')

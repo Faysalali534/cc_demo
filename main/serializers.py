@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from main.models import Currency, RecordedData
+from main.models import Currency, RecordedData, Exchange
 from main.models import Account
 from main.models import Input
 
@@ -58,3 +58,9 @@ class AccountRetrieveUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Account
         fields = ['id', 'api_key', 'secret_key']
+
+
+class ExchangeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Exchange
+        fields = '__all__'

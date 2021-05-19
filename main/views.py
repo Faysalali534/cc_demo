@@ -5,10 +5,10 @@ from rest_framework.authtoken.models import Token
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 
-from main.models import Input, Account, RecordedData
+from main.models import Input, Account, RecordedData, Exchange
 from main.models import Currency
 
-from main.serializers import AccountSerializer
+from main.serializers import AccountSerializer, ExchangeSerializer
 from main.serializers import AccountRetrieveUpdateSerializer
 from main.serializers import RecordedDataSerializer
 from main.serializers import ReteriveInputSerializer
@@ -146,3 +146,8 @@ class AccountRetrieveUpdate(generics.RetrieveUpdateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountRetrieveUpdateSerializer
     permission_classes = (IsAuthenticated,)
+
+class ExchangeCompany(generics.ListAPIView):
+    permission_classes = (IsAuthenticated,)
+    queryset = Exchange.objects.all()
+    serializer_class = ExchangeSerializer

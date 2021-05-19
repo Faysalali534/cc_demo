@@ -1,0 +1,182 @@
+[
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "BTC"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "ETH"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "XRP"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "LTC"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "BCH"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "EOS"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "BNB"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "BSV"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "USDT"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "ATOM"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "BAT"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "BTG"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "DASH"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "DOGE"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "ETC"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "IOTA"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "LSK"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "MKR"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "NEO"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "PAX"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "QTUM"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "TRX"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "TUSD"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "USD"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "USDC"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "WAVES"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "XEM"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "XMR"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "ZEC"
+    }
+  },
+  {
+    "model": "main.currency",
+    "fields": {
+      "name": "ZRX"
+    }
+  }
+]

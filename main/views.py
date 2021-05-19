@@ -9,6 +9,7 @@ from main.models import Input, Account, RecordedData
 from main.models import Currency
 
 from main.serializers import AccountSerializer
+from main.serializers import AccountRetrieveUpdateSerializer
 from main.serializers import RecordedDataSerializer
 from main.serializers import ReteriveInputSerializer
 
@@ -138,4 +139,10 @@ class RecordedDataList(generics.ListAPIView):
 class InputRetrieve(generics.RetrieveAPIView):
     queryset = Input.objects.all()
     serializer_class = ReteriveInputSerializer
+    permission_classes = (IsAuthenticated,)
+
+
+class AccountRetrieveUpdate(generics.RetrieveUpdateAPIView):
+    queryset = Account.objects.all()
+    serializer_class = AccountRetrieveUpdateSerializer
     permission_classes = (IsAuthenticated,)

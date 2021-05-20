@@ -4,6 +4,7 @@ from datetime import datetime
 import ccxt
 
 from main.models import RecordedData, Log
+from django.conf import settings
 
 
 class ExchangeManipulation:
@@ -57,7 +58,7 @@ class ExchangeManipulation:
         after_value = float(after)
         before_value = float(before)
         total = before_value * 100
-        if not total:
+        if not total and settings.TEST_ENV:
             total = 10
         roi = after_value - before_value / total
         return roi

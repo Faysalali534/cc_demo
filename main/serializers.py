@@ -1,9 +1,12 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
-from main.models import Currency, RecordedData, Exchange
+from main.models import Currency
 from main.models import Account
 from main.models import Input
+from main.models import RecordedData
+from main.models import Exchange
+from main.models import Log
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -64,3 +67,10 @@ class ExchangeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Exchange
         fields = '__all__'
+
+
+class LogsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Log
+        fields = '__all__'
+        depth = 2

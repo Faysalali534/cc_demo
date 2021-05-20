@@ -17,6 +17,6 @@ urlpatterns = [
     path('retrieve/input/<int:pk>', views.InputRetrieve.as_view(), name='retrieve_input'),
     path('account/<int:pk>', views.AccountRetrieveUpdate.as_view(), name='account_retrieve_update'),
     path('exchange/', views.ExchangeCompany.as_view(), name='exchange'),
-    path('log/', views.LogsData.as_view(), name='logs')
+    path('log/<int:input_id>', views.LogsData.as_view(), name='logs')
 
 ]

@@ -98,6 +98,12 @@ class Input(models.Model):
         return f"<id:{self.pk}> - <currency:{self.currency.name}> - <user:{self.account.user.username}> - <account_id:{self.account.id}>"
 
 
+class Log(models.Model):
+    input = models.ForeignKey(Input, on_delete=models.CASCADE)
+    info = models.TextField(default='')
+    status = models.CharField(max_length=30, default='successful')
+
+
 class RecordedData(models.Model):
     Input = models.ForeignKey(Input, on_delete=models.CASCADE)
     before = models.CharField(max_length=60)

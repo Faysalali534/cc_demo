@@ -52,7 +52,16 @@ class ExchangeManipulation:
             )
             self._place_queue_data(balance=balance, ledger=ledger)
         except Exception as error:
-            Log.objects.create(input=self.input_instance, info=str(error), status='Failed')
+            Log.objects.create(
+                input_id=self.input_instance.id,
+                currency=self.input_instance.currency,
+                start_date=self.input_instance.start_date,
+                end_date=self.end_date,
+                category=self.category,
+                exchange=self.input_instance.exchange,
+                info=str(error),
+                status="Failed",
+            )
 
     def _calculate_roi(self, after, before):
         after_value = float(after)
@@ -61,7 +70,7 @@ class ExchangeManipulation:
         if not total and settings.TEST_ENV:
             total = 10
         roi = after_value - before_value / total
-        return roi
+        return str(roi)[:4]
 
     def _place_queue_data(self, balance, ledger):
 
@@ -101,4 +110,11 @@ class ExchangeManipulation:
                         roi=roi
 
                     )
-        Log.objects.create(input=self.input_instance)
+        Log.objects.create(
+            currency=self.input_instance.currency,
+            start_date=self.input_instance.start_date,
+            end_date=self.end_date,
+            category=self.category,
+            exchange=self.input_instance.exchange,
+            input_id=self.input_instance.id
+        )

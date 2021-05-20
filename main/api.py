@@ -3,7 +3,7 @@ from datetime import datetime
 
 import ccxt
 
-from main.models import RecordedData
+from main.models import RecordedData, Log
 
 
 class ExchangeManipulation:
@@ -39,16 +39,19 @@ class ExchangeManipulation:
         )
 
     def generate_balance_and_leger(self):
-        client = self._get_client()
-        client.set_sandbox_mode(True)
-        balance = client.fetch_balance({"coin": self.currency})
-        start_unix_date = time.mktime(self.start_date.timetuple())
-        end_unix_date = time.mktime(self.end_date.timetuple())
-        ledger = client.fetch_ledger(
-            params={"currency": self.currency, "till": end_unix_date},
-            since=start_unix_date,
-        )
-        self._place_queue_data(balance=balance, ledger=ledger)
+        try:
+            client = self._get_client()
+            client.set_sandbox_mode(True)
+            balance = client.fetch_balance({"coin": self.currency})
+            start_unix_date = time.mktime(self.start_date.timetuple())
+            end_unix_date = time.mktime(self.end_date.timetuple())
+            ledger = client.fetch_ledger(
+                params={"currency": self.currency, "till": end_unix_date},
+                since=start_unix_date,
+            )
+            self._place_queue_data(balance=balance, ledger=ledger)
+        except Exception as error:
+            Log.objects.create(input=self.input_instance, info=str(error), status='Failed')
 
     def _calculate_roi(self, after, before):
         after_value = float(after)
@@ -60,6 +63,7 @@ class ExchangeManipulation:
         return roi
 
     def _place_queue_data(self, balance, ledger):
+
         realised_pnl = balance["info"]["result"][self.currency].get("realised_pnl")
         for data in ledger:
             ledger_id = data.get("id")
@@ -96,3 +100,4 @@ class ExchangeManipulation:
                         roi=roi
 
                     )
+        Log.objects.create(input=self.input_instance)

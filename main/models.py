@@ -99,7 +99,12 @@ class Input(models.Model):
 
 
 class Log(models.Model):
-    input = models.ForeignKey(Input, on_delete=models.CASCADE)
+    input_id = models.IntegerField()
+    currency = models.ForeignKey(Currency, on_delete=models.CASCADE, null=True)
+    exchange = models.ForeignKey(Exchange, on_delete=models.CASCADE, null=True)
+    start_date = models.DateTimeField(default=django.utils.timezone.now)
+    end_date = models.DateTimeField(default=django.utils.timezone.now)
+    category = models.CharField(max_length=30, default='inverse')
     info = models.TextField(default='')
     status = models.CharField(max_length=30, default='successful')
 

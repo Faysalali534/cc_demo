@@ -1,0 +1,710 @@
+[
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "aax"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "aofex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "ascendex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bequant"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bibox"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bigone"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "binance"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "binancecoinm"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "binanceus"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "binanceusdm"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bit2c"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitbank"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitbay"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitbns"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitcoincom"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitfinex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitfinex2"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitflyer"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitforex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitget"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bithumb"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitkk"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitmart"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitmex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitpanda"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitso"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitstamp"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitstamp1"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bittrex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitvavo"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bitz"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bl3p"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "braziliex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "btcalpha"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "btcbox"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "btcmarkets"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "btctradeua"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "btcturk"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "buda"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bw"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bybit"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "bytetrade"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "cdax"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "cex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinbase"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinbaseprime"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinbasepro"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coincheck"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinegg"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinfalcon"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinfloor"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coingi"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinmarketcap"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinmate"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinone"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "coinspot"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "crex24"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "currencycom"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "delta"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "deribit"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "digifinex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "equos"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "eterbase"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "exmo"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "exx"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "flowbtc"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "ftx"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "gateio"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "gemini"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "gopax"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "hbtc"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "hitbtc"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "hollaex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "huobijp"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "huobipro"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "idex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "independentreserve"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "indodax"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "itbit"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "kraken"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "kucoin"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "kuna"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "lakebtc"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "latoken"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "lbank"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "liquid"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "luno"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "lykke"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "mercado"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "mixcoins"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "ndax"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "novadax"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "oceanex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "okcoin"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "okex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "paymium"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "phemex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "poloniex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "probit"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "qtrade"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "rightbtc"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "ripio"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "southxchange"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "stex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "therock"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "tidebit"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "tidex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "timex"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "upbit"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "vcc"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "wavesexchange"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "whitebit"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "xbtce"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "xena"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "yobit"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "zaif"
+    }
+  },
+  {
+    "model": "main.exchange",
+    "fields": {
+      "name": "zb"
+    }
+  }
+]

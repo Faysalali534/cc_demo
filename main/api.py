@@ -67,6 +67,7 @@ class ExchangeManipulation:
         after_value = float(after)
         before_value = float(before)
         total = before_value * 100
+        # setting for the purpose of test , because after and before are sometimes in random values
         if not total and settings.TEST_ENV:
             total = 10
         roi = after_value - before_value / total

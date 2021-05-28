@@ -3,10 +3,11 @@ from pprint import pprint
 
 # testing for bybit exchange
 exchange = ccxt.bybit({
-    'apiKey': 'tfiebTVMW7HMsxttfH',
-    'secret': '4EUUZvoQj0WboHOQDp5PsJC8YdwhKPM5YpvA',
+    'apiKey': 'UCAjbj8nDJukLFT7Gc',
+    'secret': 'uctrMSfZ9jVXq4jbIgfNPVAneEbqc8WgXRDD',
     'rateLimit': 100,  # unified exchange property
     'options': {
+        'adjustForTimeDifference': True,
         'defaultType': 'inverse',  # exchange-specific option
     }
 })

@@ -1,0 +1,143 @@
+{% extends "cc_app/base.html" %}
+{% block content %}
+    {% include "cc_app/nav.html" with title="home" %}
+    <style>
+        .chart {
+            width: 80%;
+            margin: 0 auto;
+        }
+
+        .chart-wrapper {
+            margin-bottom: 50px;
+        }
+
+        .messageBox {
+            display: none;
+            width: 70%;
+            margin: 20px auto;
+            border: 1px solid black;
+            border-radius: 15px;
+            padding: 25px;
+        }
+    </style>
+    <main role="main" class="container">
+        <br>
+        <div class="chart">
+            <div class="chart-wrapper">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div id="chartTable"></div>
+            <hr>
+            <div class="panel panel-primary messageBox">
+                <div class="panel-heading text-center"><h3>There are no records.</h3></div>
+                <div class="panel-body text-center">
+                    <button type="button" class="btn btn-dark btn-lg">Check Logs</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            ajaxCall()
+
+            setInterval(() => {
+                backgroundTask()
+            }, 12000)
+            setInterval(() => {
+                ajaxCall()
+            }, 5000)
+        })
+
+        function creatngChart(xValues, yValues) {
+            new Chart("myChart", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        label: 'ROI',
+                        fill: false,
+                        lineTension: 0,
+                        backgroundColor: "black",
+                        borderColor: "black",
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {display: true, text: 'ROI'},
+                    legend: {display: true},
+                    scales: {
+                        yAxes: [{
+                            ticks: {min: 0, max: 100}
+                        }],
+                    }
+                }
+            });
+        }
+
+        function ajaxCall() {
+            var xValues = [], yValues = [], idArray = [], url = "{{ api_host }}Recorded/Data/{{input}}";
+            var settings = {
+                "url": url,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Token {{token}}"
+                },
+            };
+
+            $.ajax(settings).done(function (response) {
+                if (response[0] == null) {
+                    var mesgBox = document.getElementsByClassName('messageBox')[0];
+                    mesgBox.style.display = "block"
+                } else {
+                    for (var j = 0; j <= response.length - 1; j++) {
+                        idArray.push(response[j].id)
+                    }
+                    var highestId = Math.max(...idArray)
+                    var lowestId = highestId - 12
+                    for (var i = 0; i <= response.length - 1; i++) {
+                        if (lowestId < response[i].id && response[i].id <= highestId) {
+                            xValues.push(response[i].captured_date);
+                            yValues.push(response[i].roi);
+                        }
+                    }
+                    creatngChart(xValues, yValues)
+                    creatingTable(response);
+                      var mesgBox = document.getElementsByClassName('messageBox')[0];
+                      mesgBox.style.display = "none"
+                }
+            }).fail(function () {
+                alert("Request Failed!");
+            });
+        }
+
+        function backgroundTask() {
+            var settings = {
+                "url": "{{ api_host }}generate/queue",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Token {{token}}",
+                    "Content-Type": "application/json",
+                },
+                "data": JSON.stringify({"input_data_id":"{{input}}"}),
+            };
+
+            $.ajax(settings).done(function (response) {
+                console.log(response);
+            });
+        }
+
+        function creatingTable(resp) {
+            var tableData = resp
+            var table = new Tabulator("#chartTable", {
+                data: tableData,
+                autoColumns: true,
+            });
+        }
+    </script>
+
+
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "cc_app/base.html" %}
+{% block content %}
+    {% include "cc_app/nav.html" with title="information" %}
+
+    <main role="main" class="container">
+        <hr>
+        <h2>Input Required Information</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="category">Category</label>
+                <input type="text" class="form-control" id="category" placeholder="Enter category (optional)"
+                       name="category">
+            </div>
+
+            <div class="form-group">
+                <label for="api_key">Api key</label>
+                <input type="text" class="form-control" id="api_key" placeholder="Enter Api Key"
+                       name="api_key" required>
+            </div>
+
+            <div class="form-group">
+                <label for="secret_key">Secret Key</label>
+                <input type="text" class="form-control" name="secret_key" id="secret_key"
+                       placeholder="Enter Secret Key" required>
+            </div>
+
+            <div class="form-group">
+                <label for="start_date">Starting Date</label>
+                <input type="datetime-local" class="form-control" name="start_date" id="start_date"
+                       placeholder="Enter Starting Date" required>
+            </div>
+            <div class="form-group">
+                <label for="end_date">Ending Date</label>
+                <input type="datetime-local" class="form-control" name="end_date" id="end_date"
+                       placeholder="Enter Ending Date" required>
+            </div>
+
+            <div class="form-group">
+                <label for="currency">Currency</label>
+                <select id="currency" name="currency_capture" class="custom-select mb-3" required>
+
+                    {% for currency in currencies %}
+                        <option value="{{ currency.id }}">{{ currency.name }}</option>
+
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="exchange">Exchanges</label>
+                <select id="exchange" name="exchange" class="custom-select mb-3" required>
+
+                    {% for exchange in exchanges %}
+                        <option value="{{ exchange.id }}">{{ exchange.name }}</option>
+
+                    {% endfor %}
+                </select>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        {% if message %}
+            <br>
+            <div class="alert alert-dark">
+                <strong>{{ message }}</strong> </a>.
+            </div>
+            <br>
+        {% endif %}
+        {% if input_data %}
+            <br>
+            <hr>
+            <h2>Registered Input</h2>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Starting Date</th>
+                    <th>Ending Date</th>
+                    <th>Currency</th>
+                    <th>Exchange</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ input_data.category }}</td>
+                    <td>{{ input_data.start_date }}</td>
+                    <td>{{ input_data.end_date }}</td>
+                    <td>{{ input_data.currency.name }}</td>
+                    <td>{{ input_data.exchange.name }}</td>
+
+
+                </tr>
+
+
+                </tbody>
+            </table>
+            <br>
+            <hr>
+            <h2>Registered Keys</h2>
+
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Api Key</th>
+                    <th>Secret Key</th>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ account_detail.api_key }}</td>
+                    <td>{{ account_detail.secret_key }}</td>
+
+
+                </tr>
+
+
+                </tbody>
+            </table>
+        {% endif %}
+        </main>
+{% endblock %}

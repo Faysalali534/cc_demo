@@ -1,0 +1,56 @@
+{% extends "cc_app/base.html" %}
+{% block content %}
+    {% include "cc_app/nav.html" with title="logs" %}
+
+    <main role="main" class="container">
+        <hr>
+        <h2>Logs<h2>
+<div class="table-wrapper" style="width: 70%; margin: 50px auto;">
+    <div id="infoTable" class="my-5"></div>
+</div>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+            <script>
+    $(document).ready(function () {
+        $(document).ready(function () {
+            gettingLog()
+            setInterval(()=> {gettingLog()}, 5000)
+        })
+    })
+    function gettingLog(){
+        var url = "{{api_host}}log/{{input}}";
+        var settings = {
+            "url": url,
+            "method": "GET",
+            "timeout": 0,
+            "headers": {
+                "Authorization": "Token {{token}}"
+            },
+        };
+        $.ajax(settings).done(function (response) {
+            creatingTable(response)
+        }).fail(function() {
+            alert( "Request Failed!" );
+        });
+    }
+    function creatingTable(resp) {
+        var tableData = resp
+        console.log(tableData)
+        var table = new Tabulator("#infoTable", {
+            data: tableData,
+            layout:"fitColumns",
+            columns:[
+                {title:"Info", field:"info"},
+                {title:"status", field:"status"},
+                {title:"Input Id", field:"input_id"},
+                {title:"Start Date", field:"start_date"},
+                {title:"End Date", field:"end_date"},
+                {title:"Category", field:"category"},
+                {title:"Currency", field:"currency.name"},
+                {title:"Exchange", field:"exchange.name"},
+            ],
+            // autoColumns:true,
+        });
+    }
+</script>
+        </main>
+{% endblock %}

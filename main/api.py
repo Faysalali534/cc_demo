@@ -34,6 +34,7 @@ class ExchangeManipulation:
                 "timeout": 1000,
                 "enableRateLimit": True,
                 'options': {
+                    'adjustForTimeDifference': True,
                     'defaultType': self.category,  # exchange-specific option
                 }
             }
@@ -84,6 +85,7 @@ class ExchangeManipulation:
                 before = data.get("before")
                 after = data.get("after")
                 transaction_time = data.get("datetime")
+                
                 captured_date = datetime.strptime(transaction_time[:-1], '%Y-%m-%dT%H:%M:%S.%f')
                 type = data.get("info")["type"]
                 roi = self._calculate_roi(after=after, before=before)

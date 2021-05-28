@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'cc_app:home' %}">Moon Walker Growth</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="{% if title == 'home' %}nav-item active{% else %}nav-item{% endif %}">
+                <a class="nav-link" href="{% url 'cc_app:portal' %}"> Strategy Listing<span class="sr-only">(current)</span></a>
+            </li>
+         <li class="{% if title == 'logs' %}nav-item active{% else %}nav-item{% endif %}">
+                <a class="nav-link" href="{% url 'cc_app:log' %}">Log</a>
+            </li>
+            <li class="{% if title == 'information' %}nav-item active{% else %}nav-item{% endif %}">
+                <a class="nav-link" href="{% url 'cc_app:information' %}">Information</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'cc_app:logout' %}">Logout</a>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>

@@ -4,8 +4,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from cc_app import api
-from django.conf import settings
 
+from cc_app.api import API_HOST
+
+HOST=f"{API_HOST}/"
 
 def home(request):
     return render(request, 'cc_app/home.html', context={})
@@ -128,7 +130,7 @@ def portal(request):
     if not request.session.get("token"):
         return redirect(reverse("cc_app:index"))
     context = dict(
-        api_host=settings.API_HOST,
+        api_host=HOST,
         token=request.session.get("token"),
         input=request.session["input_id"],
     )
@@ -149,7 +151,7 @@ def log(request):
     if not request.session.get('token'):
         return redirect(reverse('cc_app:index'))
     context = dict(
-        api_host=settings.API_HOST,
+        api_host=HOST,
         token=request.session.get("token"),
         input=request.session["input_id"],
     )

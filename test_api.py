@@ -1,10 +1,15 @@
 import ccxt
 from pprint import pprint
 
+
+
+# s299o7liRLmO8gxSq14M2JMAxY7yXQsJQA3a -> secret
+
+# mqLu1EHk8l4RWfk3Kc
 # testing for bybit exchange
 exchange = ccxt.bybit({
-    'apiKey': 'UCAjbj8nDJukLFT7Gc',
-    'secret': 'uctrMSfZ9jVXq4jbIgfNPVAneEbqc8WgXRDD',
+    'apiKey': 'mqLu1EHk8l4RWfk3Kc',
+    'secret': 's299o7liRLmO8gxSq14M2JMAxY7yXQsJQA3a',
     'rateLimit': 100,  # unified exchange property
     'options': {
         'adjustForTimeDifference': True,

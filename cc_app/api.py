@@ -1,10 +1,16 @@
 import requests
 from django.conf import settings
 import json
+import django.core.management.commands.runserver as runserver
+from django.urls import reverse
+
+cmd = runserver.Command()
+API_HOST = f"http://{cmd.default_addr}:{cmd.default_port}"
 
 
 def register(api_key, secret_key, **kwargs):
-    endpoint = f'{settings.API_HOST}register/'
+    url = reverse('register')
+    endpoint = f'{API_HOST}{url}'
     first_name = kwargs.get('first_name')
     email = kwargs.get('email')
     last_name = kwargs.get('last_name')
@@ -31,7 +37,8 @@ def register(api_key, secret_key, **kwargs):
 
 
 def login(username, password):
-    endpoint = f'{settings.API_HOST}login/'
+    url = reverse('login')
+    endpoint = f'{API_HOST}{url}'
 
     payload = {
 
@@ -51,7 +58,8 @@ def login(username, password):
 
 
 def get_currency(token):
-    endpoint = f'{settings.API_HOST}currency/'
+    url = reverse('currencies')
+    endpoint = f'{API_HOST}{url}'
 
     headers = {
         'Content-Type': 'application/json',
@@ -71,7 +79,8 @@ def insert_input(account, token, start_date, **kwargs):
     category = kwargs.get("category")
     exchange = kwargs.get("exchange")
 
-    endpoint = f'{settings.API_HOST}input/'
+    url = reverse('input')
+    endpoint = f'{API_HOST}{url}'
 
     payload = {
 
@@ -101,7 +110,8 @@ def update_input(account, token, start_date, input_id, **kwargs):
     category = kwargs.get("category")
     exchange = kwargs.get("exchange")
 
-    endpoint = f'{settings.API_HOST}input/update/{input_id}'
+    url = reverse('input_update', kwargs=dict(id=input_id))
+    endpoint = f'{API_HOST}{url}'
 
     payload = {
 
@@ -125,8 +135,8 @@ def update_input(account, token, start_date, input_id, **kwargs):
 
 
 def get_input_data(token, input_id):
-    endpoint = f'{settings.API_HOST}retrieve/input/{input_id}'
-
+    url = reverse('retrieve_input', kwargs=dict(pk=input_id))
+    endpoint = f'{API_HOST}{url}'
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Token {token}'
@@ -139,8 +149,8 @@ def get_input_data(token, input_id):
 
 
 def get_account_detail(token, account_id):
-    endpoint = f'{settings.API_HOST}account/{account_id}'
-
+    url = reverse('account_retrieve_update', kwargs=dict(pk=account_id))
+    endpoint = f'{API_HOST}{url}'
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Token {token}'
@@ -157,8 +167,8 @@ def update_account_detail(account_id, token, **kwargs):
     secret_key = kwargs.get("secret_key")
     api_key = kwargs.get("api_key")
 
-    endpoint = f'{settings.API_HOST}account/{account_id}'
-
+    url = reverse('account_retrieve_update', kwargs=dict(pk=account_id))
+    endpoint = f'{API_HOST}{url}'
     payload = {
 
         "api_key": api_key,
@@ -177,8 +187,8 @@ def update_account_detail(account_id, token, **kwargs):
 
 
 def get_exchange(token):
-    endpoint = f'{settings.API_HOST}exchange/'
-
+    url = reverse('exchange')
+    endpoint = f'{API_HOST}{url}'
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Token {token}'

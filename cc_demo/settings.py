@@ -90,14 +90,13 @@ WSGI_APPLICATION = 'cc_demo.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env_variable.get("Postgresql-Cred", "database"),
-        'USER': env_variable.get("Postgresql-Cred", "user_name"),
-        'PASSWORD': env_variable.get("Postgresql-Cred", "password"),
-        'HOST': env_variable.get("Postgresql-Cred", "host"),
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
         'PORT': 5432
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -149,7 +148,7 @@ REST_FRAMEWORK = {
     ],
 }
 
-CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+CELERY_BROKER_URL = "redis://redis:6379"
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'

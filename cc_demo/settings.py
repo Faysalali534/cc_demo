@@ -154,4 +154,3 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_BACKEND = 'django-db'
 
 TEST_ENV = env_variable.get("Test-Cred", "test_run") or False
-API_HOST = env_variable.get("API-Cred", "HOST")
